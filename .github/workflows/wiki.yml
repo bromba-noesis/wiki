@@ -25,6 +25,7 @@ jobs:
         run: echo "myTag=${GITHUB_REF_NAME}" >> $GITHUB_ENV
       - name: prep file
         run: |
+          echo "$myProject"
           echo "| $myDate | $myHour | $myCID | $myBranch | $myTag |"
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
