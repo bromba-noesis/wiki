@@ -21,7 +21,7 @@ jobs:
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
         with:
-          path: ${{ myFile }}
+          path: ${{ env.myFile }}
           contents: |
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
