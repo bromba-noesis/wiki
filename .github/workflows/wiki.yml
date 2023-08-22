@@ -28,14 +28,17 @@ jobs:
             |------|------|-----------|--------|-----|
             | $myDate | $myHour | $myCID | $myBranch | $myTag |
           write-mode: overwrite  
-      - name: Commit & Push 
-        uses: Andro999b/push@v1.3
+      - name: Commit  
+        run: |
+          git config --local user.email "test@test.com"
+          git config --local user.name "bromba-noesis"
+          git commit -a -m "'Update to ${myProject} wiki files"
+      - name: Push 
+        uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          github_token: ${{ secrets.bromba_noesis_pat_wiki }}
           force: true
-          message: 'Update to ${myProject} wiki files'
-      - name: Upload to Wiki
+      - name: Upload to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
           path: $myProject
