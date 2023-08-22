@@ -25,12 +25,10 @@ jobs:
         run: echo "myTag=${GITHUB_REF_NAME}" >> $GITHUB_ENV
       - name: prep file
         run: |
-          echo "$myProject"
           echo "| $myDate | $myHour | $myCID | $myBranch | $myTag |"
-          find .
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
-          path: "envs-public"
+          path: $myProject
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.bromba_noesis_pat_wiki }}
