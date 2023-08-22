@@ -1,0 +1,34 @@
+name: Wiki
+
+on: 
+    workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Project
+        run: echo "myProject=envs-public" >> $GITHUB_ENV
+      - name: Environment
+        run: echo "myEnvironment=Dev" >> $GITHUB_ENV
+      - name: Date
+        run: echo "myDate=$(date +'%Y%m%d')" >> $GITHUB_ENV
+      - name: Hour
+        run: echo "myHour=$(date +'%H:%M:%S')" >> $GITHUB_ENV
+      - name: Commit ID
+        run: echo "myCID=${GITHUB_SHA}" >> $GITHUB_ENV
+      - name: Branch name
+        run: echo "myBranch=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      - name: Tag name
+        run: echo "myTag=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+      - name: prep file
+        run: |
+          echo "| $myDate | $myHour | $myCID | $myBranch | $myTag |"
+      - name: Upload Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "wiki/${myProject}"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.bromba_noesis_pat_wiki }}
