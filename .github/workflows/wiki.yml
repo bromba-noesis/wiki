@@ -25,7 +25,7 @@ jobs:
           contents: |
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
-            | $myDate | $myHour | env.myCID | env.myBranch | env.myTag |
+            | ${{ env.myDate }} | $myHour | env.myCID | env.myBranch | env.myTag |
           write-mode: overwrite  
       - name: Commit  
         run: |
