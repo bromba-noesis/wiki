@@ -27,6 +27,7 @@ jobs:
         run: |
           echo "$myProject"
           echo "| $myDate | $myHour | $myCID | $myBranch | $myTag |"
+          find .
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
