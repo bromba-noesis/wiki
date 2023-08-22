@@ -10,8 +10,7 @@ jobs:
     steps:
       - name: Setup variables
         run: |
-          echo "myProject=envs-public" >> $GITHUB_ENV
-          echo "myEnvironment=Dev" >> $GITHUB_ENV
+          echo "myFile=envs-public/Dev-deployments.md" >> $GITHUB_ENV
           echo "myDate=$(date +'%Y%m%d')" >> $GITHUB_ENV
           echo "myHour=$(date +'%H:%M:%S')" >> $GITHUB_ENV
           echo "myCID=${GITHUB_SHA}" >> $GITHUB_ENV
@@ -22,12 +21,11 @@ jobs:
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
         with:
-          #path: env.myProject/env.myEnvironment-deployments.md
-          path: envs-public/Dev-deployments.md
+          path: ${{ myFile }}
           contents: |
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
-            | env.myDate | env.myHour | env.myCID | env.myBranch | env.myTag |
+            | $myDate | $myHour | env.myCID | env.myBranch | env.myTag |
           write-mode: overwrite  
       - name: Commit  
         run: |
