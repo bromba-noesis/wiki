@@ -24,9 +24,9 @@ jobs:
         with:
           path: $myProject/$myEnvironment-deployments.md
           contents: |
-            | Date | Hour | Commit ID | Branch | Tag |
-            |------|------|-----------|--------|-----|
-            | $myDate | $myHour | $myCID | $myBranch | $myTag |
+            "| Date | Hour | Commit ID | Branch | Tag |"
+            "|------|------|-----------|--------|-----|"
+            "| $myDate | $myHour | $myCID | $myBranch | $myTag |"
           write-mode: overwrite  
       - name: Commit  
         run: |
