@@ -22,11 +22,12 @@ jobs:
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
         with:
-          path: env.myProject/env.myEnvironment-deployments.md
+          #path: env.myProject/env.myEnvironment-deployments.md
+          path: envs-public/Dev-deployments.md
           contents: |
-            "| Date | Hour | Commit ID | Branch | Tag |"
-            "|------|------|-----------|--------|-----|"
-            "| $myDate | $myHour | $myCID | $myBranch | $myTag |"
+            | Date | Hour | Commit ID | Branch | Tag |
+            |------|------|-----------|--------|-----|
+            | env.myDate | env.myHour | env.myCID | env.myBranch | env.myTag |
           write-mode: overwrite  
       - name: Commit  
         run: |
