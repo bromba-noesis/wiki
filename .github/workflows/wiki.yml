@@ -30,6 +30,7 @@ jobs:
           write-mode: overwrite  
       - name: Commit  
         run: |
+          cat $myProject/$myEnvironment-deployments.md
           git config --local user.email "test@test.com"
           git config --local user.name "bromba-noesis"
           git commit -a -m "'Update to ${myProject} wiki files"
