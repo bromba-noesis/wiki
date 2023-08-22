@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
       - name: Setup variables
         run: |
           echo "myProject=envs-public" >> $GITHUB_ENV
@@ -18,7 +17,9 @@ jobs:
           echo "myCID=${GITHUB_SHA}" >> $GITHUB_ENV
           echo "myBranch=${GITHUB_REF##*/}" >> $GITHUB_ENV
           echo "myTag=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-      - name: Update files
+      - name: Checkout entire repo
+        uses: actions/checkout@v3
+      - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
         with:
           path: $myProject/$myEnvironment-deployments.md
@@ -26,7 +27,14 @@ jobs:
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
             | $myDate | $myHour | $myCID | $myBranch | $myTag |
-          write-mode: overwrite          
+          write-mode: overwrite  
+      - name: Commit & Push 
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.bromba_noesis_pat_wiki }}
+          branch: main
+          force: true
+          message: 'Update to ${myProject} wiki files'
       - name: Upload to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
