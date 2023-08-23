@@ -17,10 +17,6 @@ jobs:
           repository: '${{ github.repository }}.wiki'
           sparse-checkout: 'Home.md'
 
-      - name: temp1
-        run: |
-            cat Home.md
-
       - name: Update project index wiki file
         run: |
           # add project to general index page
@@ -33,20 +29,15 @@ jobs:
         run: |
           # create new project index page
           echo "Deployments by environment:" > ${{ env.myProject }}_Home.md
-          echo "* [Dev](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Development_deployments)" >> ${{ env.myProject }}_Home.md
-          echo "* [Qua](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Quality_deployments)" >> ${{ env.myProject }}_Home.md
-          echo "* [Prd](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Production_deployments)" >> ${{ env.myProject }}_Home.md
+          echo "* [Dev](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Development_Deployments)" >> ${{ env.myProject }}_Home.md
+          echo "* [Qua](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Quality_Deployments)" >> ${{ env.myProject }}_Home.md
+          echo "* [Prd](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Production_Deployments)" >> ${{ env.myProject }}_Home.md
           # create empty page for each environment 
-          echo "-" > ${{ env.myProject }}_Development_deployments.md
-          echo "-" > ${{ env.myProject }}_Quality_deployments.md
-          echo "-" > ${{ env.myProject }}_Production_deployments.md
+          echo "-" > ${{ env.myProject }}_Development_Deployments.md
+          echo "-" > ${{ env.myProject }}_Quality_Deployments.md
+          echo "-" > ${{ env.myProject }}_Production_Deployments.md
 
-      - name: temp2
-        run: |
-            find .
-            cat ${{ env.myProject }}_Home.md
-            
-      - name: Upload pages to wiki
+      - name: Upload all pages to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
           path: .
