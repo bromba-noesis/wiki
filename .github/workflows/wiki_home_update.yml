@@ -30,7 +30,7 @@ jobs:
         
         #  write-mode: append
         run: |
-          echo '*' >> Home.md
+          echo '\n' >> Home.md
           
         #echo * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}) >> Home.md
 
