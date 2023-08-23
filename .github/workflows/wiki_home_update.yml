@@ -9,8 +9,7 @@ jobs:
 
     steps:
       - name: Setup variables
-        run: |
-          echo "myProject="bbb" >> $GITHUB_ENV
+        run: echo "myProject=bbb" >> $GITHUB_ENV
 
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
