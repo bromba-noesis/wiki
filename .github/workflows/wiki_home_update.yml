@@ -33,9 +33,9 @@ jobs:
         run: |
           # create new project index page
           echo "Deployments by environment:" > ${{ env.myProject }}_Home.md
-          echo "* [Dev](https://github.com/bromba-noesis/envs-public/wiki/${{ env.myProject }}_Development_deployments)" >> ${{ env.myProject }}_Home.md
-          echo "* [Qua](https://github.com/bromba-noesis/envs-public/wiki/${{ env.myProject }}_Quality_deployments)" >> ${{ env.myProject }}_Home.md
-          echo "* [Prd](https://github.com/bromba-noesis/envs-public/wiki/${{ env.myProject }}_Production_deployments)" >> ${{ env.myProject }}_Home.md
+          echo "* [Dev](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Development_deployments)" >> ${{ env.myProject }}_Home.md
+          echo "* [Qua](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Quality_deployments)" >> ${{ env.myProject }}_Home.md
+          echo "* [Prd](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}_Production_deployments)" >> ${{ env.myProject }}_Home.md
           # create empty page for each environment 
           echo "-" > ${{ env.myProject }}_Development_deployments.md
           echo "-" > ${{ env.myProject }}_Quality_deployments.md
