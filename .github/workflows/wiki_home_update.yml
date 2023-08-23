@@ -31,11 +31,11 @@ jobs:
 
       - name: temp2
         run: |
-            cat wiki/Home.md
+            cat Home.md
             
       - name: Upload to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
-          path: wiki/
+          path: .
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.bromba_noesis_pat_wiki }}
