@@ -29,38 +29,26 @@ jobs:
           grep -v '^[[:space:]]*$' Home.md | sort > newHome.md
           mv newHome.md Home.md
 
-      - name: temp2
-        run: |
-            cat Home.md
-            
-      - name: Upload index page to wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
-        with:
-          path: .
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.bromba_noesis_pat_wiki }}
-
       - name: Create project wiki files
         run: |
           # create new project index page
-          mkdir ${{ env.myProject }}
-          echo "Deployments by environment:" > ${{ env.myProject }}/Home.md
-          echo "* [Dev](https://github.com/bromba-noesis/envs-public/wiki/Dev-deployments)"
-          echo "* [Qua](https://github.com/bromba-noesis/envs-public/wiki/Qua-deployments)"
-          echo "* [Prd](https://github.com/bromba-noesis/envs-public/wiki/Prd-deployments)"
+          echo "Deployments by environment:" > ${{ env.myProject }}_Home.md
+          echo "* [Dev](https://github.com/bromba-noesis/envs-public/wiki/${{ env.myProject }}_Development_deployments)" >> ${{ env.myProject }}_Home.md
+          echo "* [Qua](https://github.com/bromba-noesis/envs-public/wiki/${{ env.myProject }}_Quality_deployments)" >> ${{ env.myProject }}_Home.md
+          echo "* [Prd](https://github.com/bromba-noesis/envs-public/wiki/${{ env.myProject }}_Production_deployments)" >> ${{ env.myProject }}_Home.md
           # create empty page for each environment 
-          touch ${{ env.myProject }}/Dev-deployments.md
-          touch ${{ env.myProject }}/Qua-deployments.md
-          touch ${{ env.myProject }}/Prd-deployments.md
+          echo "-" > ${{ env.myProject }}_Development_deployments.md
+          echo "-" > ${{ env.myProject }}_Quality_deployments.md
+          echo "-" > ${{ env.myProject }}_Production_deployments.md
 
-      - name: temp3
+      - name: temp2
         run: |
             find .
-            cat ${{ env.myProject }}/Home.md
-
-      - name: Upload project pages to wiki
+            cat ${{ env.myProject }}_Home.md
+            
+      - name: Upload pages to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
-          path: ${{ env.myProject }}
+          path: .
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.bromba_noesis_pat_wiki }}
