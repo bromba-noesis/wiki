@@ -11,6 +11,9 @@ jobs:
       - name: Setup variables
         run: echo "myProject=aaa" >> $GITHUB_ENV
 
+      - name: Checkout entire repo
+        uses: actions/checkout@v3
+
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
         with:
@@ -19,6 +22,11 @@ jobs:
             * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})
           write-mode: append
 
+      - name: temp
+        run: |
+            find .
+            cat wiki/Home.md
+            
       - name: Upload to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
