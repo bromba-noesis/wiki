@@ -14,7 +14,7 @@ jobs:
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
         with:
-          path: wiki/home.md
+          path: wiki/Home.md
           contents: |
             * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})
           write-mode: append
