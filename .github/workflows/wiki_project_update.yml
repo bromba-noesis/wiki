@@ -1,4 +1,4 @@
-name: Wiki
+name: Wiki project update
 
 on: 
     workflow_dispatch:
@@ -17,6 +17,7 @@ jobs:
           echo "myCID=${GITHUB_SHA}" >> $GITHUB_ENV
           echo "myBranch=${GITHUB_REF##*/}" >> $GITHUB_ENV
           echo "myTag=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
         with:
@@ -25,7 +26,8 @@ jobs:
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
             | ${{ env.myDate }} | ${{ env.myHour }} | ${{ env.myCID }} | ${{ env.myBranch }} | ${{ env.myTag }} |
-          write-mode: overwrite  
+          write-mode: overwrite
+
       - name: Upload to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
