@@ -9,12 +9,13 @@ jobs:
 
     steps:
       - name: Setup variables
-        run: echo "myProject=aaa" >> $GITHUB_ENV
+        run: echo "myProject=ccc" >> $GITHUB_ENV
 
       - name: Checkout wiki repo
         uses: actions/checkout@v3
         with:
           repository: '${{ github.repository }}.wiki'
+          sparse-checkout: 'Home.md'
 
       - name: temp1
         run: |
@@ -22,13 +23,14 @@ jobs:
             cat Home.md
 
       - name: Update project wiki files
-        uses: DamianReeves/write-file-action@master
-        with:
-          path: Home.md
-          contents: |
-            
-            * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})
-          write-mode: append
+        #uses: DamianReeves/write-file-action@master
+        #with:
+        #  path: Home.md
+        #  contents: |
+        #  write-mode: append
+        run: |
+          echo -e "\n" >> Home.md
+          echo * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}) >> Home.md
 
       - name: temp2
         run: |
