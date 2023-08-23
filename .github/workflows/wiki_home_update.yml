@@ -19,19 +19,18 @@ jobs:
       - name: temp1
         run: |
             find .
-            cat wiki/Home.md
+            cat Home.md
 
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
         with:
-          path: wiki/Home.md
+          path: Home.md
           contents: |
             * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})
           write-mode: append
 
       - name: temp2
         run: |
-            find .
             cat wiki/Home.md
             
       - name: Upload to wiki
