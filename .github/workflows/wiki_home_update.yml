@@ -15,11 +15,11 @@ jobs:
         uses: DamianReeves/write-file-action@master
         with:
           path: wiki/home.md
-          contents: |
-            * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})
+          contents: * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})
           write-mode: overwrite
 
       - name: Upload to wiki
+        run: find .
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
           path: wiki
