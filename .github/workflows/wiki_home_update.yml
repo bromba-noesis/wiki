@@ -19,7 +19,6 @@ jobs:
           write-mode: overwrite
 
       - name: Upload to wiki
-        run: find .
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
           path: wiki
