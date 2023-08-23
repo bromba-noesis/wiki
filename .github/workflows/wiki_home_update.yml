@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Setup variables
-        run: echo "myProject=bbb" >> $GITHUB_ENV
+        run: echo "myProject=aaa" >> $GITHUB_ENV
 
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
@@ -17,7 +17,7 @@ jobs:
           path: wiki/home.md
           contents: |
             * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})
-          write-mode: overwrite
+          write-mode: append
 
       - name: Upload to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
