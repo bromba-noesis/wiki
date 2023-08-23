@@ -23,14 +23,25 @@ jobs:
 
       - name: Update project wiki files
         run: |
-          echo -e "\n" >> Home.md
+          # add project to general index page
           echo "* [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})" >> Home.md
-          #sort Home.md > newHome.md
+          # sort index
           grep -v '^[[:space:]]*$' Home.md | sort > newHome.md
           mv newHome.md Home.md
+          # create new project index page
+          mkdir ${{ env.myProject }}
+          echo "Deployments by environment:" > ${{ env.myProject }}/Home.md
+          echo "* [Dev](https://github.com/bromba-noesis/envs-public/wiki/Dev-deployments)"
+          echo "* [Qua](https://github.com/bromba-noesis/envs-public/wiki/Qua-deployments)"
+          echo "* [Prd](https://github.com/bromba-noesis/envs-public/wiki/Prd-deployments)"
+          # create empty page for each environment 
+          touch ${{ env.myProject }}/Dev-deployments.md
+          touch ${{ env.myProject }}/Qua-deployments.md
+          touch ${{ env.myProject }}/Prd-deployments.md
 
       - name: temp2
         run: |
+            find .
             cat Home.md
             
       - name: Upload to wiki
