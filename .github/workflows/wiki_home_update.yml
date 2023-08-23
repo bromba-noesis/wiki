@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Setup variables
-        run: echo "myProject=ddd" >> $GITHUB_ENV
+        run: echo "myProject=eee" >> $GITHUB_ENV
 
       - name: Checkout wiki repo
         uses: actions/checkout@v3
@@ -25,7 +25,8 @@ jobs:
         run: |
           echo -e "\n" >> Home.md
           echo "* [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})" >> Home.md
-          sort Home.md > newHome.md
+          #sort Home.md > newHome.md
+          grep -v '^[[:space:]]*$' Home.md | sort > newHome.md
           mv newHome.md Home.md
 
       - name: temp2
