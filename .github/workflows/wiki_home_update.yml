@@ -29,7 +29,7 @@ jobs:
         #  contents: |
         #  write-mode: append
         run: |
-          echo -e "\n" >> Home.md
+          echo -e \n >> Home.md
           echo * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }}) >> Home.md
 
       - name: temp2
