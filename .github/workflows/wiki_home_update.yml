@@ -9,10 +9,17 @@ jobs:
 
     steps:
       - name: Setup variables
-        run: echo "myProject=aaa" >> $GITHUB_ENV
+        run: echo "myProject=bbb" >> $GITHUB_ENV
 
-      - name: Checkout entire repo
+      - name: Checkout wiki repo
         uses: actions/checkout@v3
+        with:
+          repository: '${{ github.repository }}.wiki.git'
+
+      - name: temp1
+        run: |
+            find .
+            cat wiki/Home.md
 
       - name: Update project wiki files
         uses: DamianReeves/write-file-action@master
@@ -22,7 +29,7 @@ jobs:
             * [${{ env.myProject }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.myProject }})
           write-mode: append
 
-      - name: temp
+      - name: temp2
         run: |
             find .
             cat wiki/Home.md
