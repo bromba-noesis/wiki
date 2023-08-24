@@ -39,7 +39,7 @@ jobs:
           echo "-" > ${{ inputs.projectName }}_Quality_Deployments.md
           echo "-" > ${{ inputs.projectName }}_Production_Deployments.md
 
-      - name: Upload all pages to wiki
+      - name: Upload pages to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
           path: .
