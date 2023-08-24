@@ -1,4 +1,4 @@
-name: Wiki home update
+name: Wiki home
 
 on: 
     workflow_dispatch:
