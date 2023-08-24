@@ -13,9 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #- name: Setup variables
-      #  run: echo "myProject=bbb" >> $GITHUB_ENV
-
       - name: Checkout wiki.wiki repo
         uses: actions/checkout@v3
         with:
@@ -25,7 +22,7 @@ jobs:
       - name: Update project index page
         run: |
           # add project to general index page
-          echo "* [${{ env.projectName }}](https://github.com/bromba-noesis/wiki/wiki/${{ env.projectName }}_Home)" >> Home.md
+          echo "* [${{ inputs.projectName }}](https://github.com/bromba-noesis/wiki/wiki/${{ inputs.projectName }}_Home)" >> Home.md
           # sort index
           grep -v '^[[:space:]]*$' Home.md | sort > newHome.md
           mv newHome.md Home.md
@@ -33,14 +30,14 @@ jobs:
       - name: Create project pages
         run: |
           # create new project index page
-          echo "Deployments by environment:" > ${{ env.projectName }}_Home.md
-          echo "* [Dev](https://github.com/bromba-noesis/wiki/wiki/${{ env.projectName }}_Development_Deployments)" >> ${{ env.projectName }}_Home.md
-          echo "* [Qua](https://github.com/bromba-noesis/wiki/wiki/${{ env.projectName }}_Quality_Deployments)" >> ${{ env.projectName }}_Home.md
-          echo "* [Prd](https://github.com/bromba-noesis/wiki/wiki/${{ env.projectName }}_Production_Deployments)" >> ${{ env.projectName }}_Home.md
+          echo "Deployments by environment:" > ${{ inputs.projectName }}_Home.md
+          echo "* [Dev](https://github.com/bromba-noesis/wiki/wiki/${{ inputs.projectName }}_Development_Deployments)" >> ${{ inputs.projectName }}_Home.md
+          echo "* [Qua](https://github.com/bromba-noesis/wiki/wiki/${{ inputs.projectName }}_Quality_Deployments)" >> ${{ inputs.projectName }}_Home.md
+          echo "* [Prd](https://github.com/bromba-noesis/wiki/wiki/${{ inputs.projectName }}_Production_Deployments)" >> ${{ inputs.projectName }}_Home.md
           # create empty page for each environment 
-          echo "-" > ${{ env.projectName }}_Development_Deployments.md
-          echo "-" > ${{ env.projectName }}_Quality_Deployments.md
-          echo "-" > ${{ env.projectName }}_Production_Deployments.md
+          echo "-" > ${{ inputs.projectName }}_Development_Deployments.md
+          echo "-" > ${{ inputs.projectName }}_Quality_Deployments.md
+          echo "-" > ${{ inputs.projectName }}_Production_Deployments.md
 
       - name: Upload all pages to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
