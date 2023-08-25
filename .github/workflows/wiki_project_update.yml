@@ -60,7 +60,7 @@ jobs:
           contents: |
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
-            | ${{ inputs.deploymentDate }} | ${{ inputs.deploymentHour }} | ${{ inputs.CID }} | ${{ inputs.projectBranch }} | ${{ inputs.projectTag }} |
+            | $inputs.deploymentDate | ${{ inputs.deploymentHour }} | ${{ inputs.CID }} | ${{ inputs.projectBranch }} | ${{ inputs.projectTag }} |
           write-mode: overwrite
 
       - name: Upload to wiki
