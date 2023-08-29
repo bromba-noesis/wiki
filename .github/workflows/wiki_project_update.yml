@@ -2,51 +2,7 @@ name: Wiki project
 
 on: 
     workflow_call:
-      inputs:
-        projectName:
-          required: true
-          type: string
-        deploymentEnvironment:
-          required: true
-          type: string
-        deploymentDate:
-          required: true
-          type: string
-        deploymentHour:
-          required: true
-          type: string
-        CID:
-          required: true
-          type: string
-        projectBranch:
-          required: true
-          type: string
-        projectTag:
-          required: true
-          type: string  
     workflow_dispatch:
-      inputs:
-        projectName:
-          required: true
-          type: string
-        deploymentEnvironment:
-          required: true
-          type: string
-        deploymentDate:
-          required: true
-          type: string
-        deploymentHour:
-          required: true
-          type: string
-        CID:
-          required: true
-          type: string
-        projectBranch:
-          required: true
-          type: string
-        projectTag:
-          required: true
-          type: string
 
 jobs:
   deploy:
@@ -57,19 +13,19 @@ jobs:
         id: setup 
         run: |
           echo "myDate=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
-          echo "myHour=$(date +'%H:%M:%S')" >> $GITHUB_ENV
-          echo "myCID=${GITHUB_SHA}" >> $GITHUB_ENV
+          echo "myHour=$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
+          echo "myCID=${GITHUB_SHA}" >> $GITHUB_OUTPUT
           echo "myBranch=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
-          echo "myTag=$GITHUB_REF_NAME" >> $GITHUB_ENV
+          echo "myTag=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
       
       - name: Update project deployment page
         uses: DamianReeves/write-file-action@master
         with:
-          path: ${{ inputs.projectName }}_${{ inputs.deploymentEnvironment }}_Deployments.md
+          path: Development_Deployments.md
           contents: |
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
-            | ${{ steps.setup.outputs.myDate }} | ${{ inputs.deploymentHour }} | ${{ inputs.CID }} | ${{ steps.setup.outputs.myBranch }} | ${{ inputs.projectTag }} |
+            | ${{ steps.setup.outputs.myDate }} | ${{ steps.setup.outputs.myHour }} | ${{ steps.setup.outputs.myCID }} | ${{ steps.setup.outputs.myBranch }} | ${{ steps.setup.outputs.myTag }} |
           write-mode: overwrite
 
       - name: Upload to wiki
