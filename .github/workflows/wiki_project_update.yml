@@ -1,6 +1,29 @@
 name: Wiki project
 
 on: 
+    workflow_call:
+      inputs:
+        projectName:
+          required: true
+          type: string
+        deploymentEnvironment:
+          required: true
+          type: string
+        deploymentDate:
+          required: true
+          type: string
+        deploymentHour:
+          required: true
+          type: string
+        CID:
+          required: true
+          type: string
+        projectBranch:
+          required: true
+          type: string
+        projectTag:
+          required: true
+          type: string  
     workflow_dispatch:
       inputs:
         projectName:
