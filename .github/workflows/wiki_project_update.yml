@@ -1,29 +1,6 @@
 name: Wiki project
 
 on: 
-    workflow_call:
-      inputs:
-        projectName:
-          required: true
-          type: string
-        deploymentEnvironment:
-          required: true
-          type: string
-        deploymentDate:
-          required: true
-          type: string
-        deploymentHour:
-          required: true
-          type: string
-        CID:
-          required: true
-          type: string
-        projectBranch:
-          required: true
-          type: string
-        projectTag:
-          required: true
-          type: string  
     workflow_dispatch:
       inputs:
         projectName:
@@ -53,6 +30,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: setup
+        id: setup 
+        run: |
+          echo "myDate=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+          echo "myHour=$(date +'%H:%M:%S')" >> $GITHUB_ENV
+          echo "myCID=${GITHUB_SHA}" >> $GITHUB_ENV
+          echo "myBranch=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "myTag=$GITHUB_REF_NAME" >> $GITHUB_ENV
+      
       - name: Update project deployment page
         uses: DamianReeves/write-file-action@master
         with:
@@ -60,7 +46,7 @@ jobs:
           contents: |
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
-            | ${{ inputs.deploymentDate }} | ${{ inputs.deploymentHour }} | ${{ inputs.CID }} | ${{ inputs.projectBranch }} | ${{ inputs.projectTag }} |
+            | ${{ steps.setup.outputs.myDate }} | ${{ inputs.deploymentHour }} | ${{ inputs.CID }} | ${{ inputs.projectBranch }} | ${{ inputs.projectTag }} |
           write-mode: overwrite
 
       - name: Upload to wiki
