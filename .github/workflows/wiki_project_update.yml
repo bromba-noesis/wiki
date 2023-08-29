@@ -2,7 +2,15 @@ name: Wiki project
 
 on: 
     workflow_call:
+      inputs:
+        myEnvironment:
+          required: true
+          type: string
     workflow_dispatch:
+      inputs:
+        myEnvironment:
+          required: true
+          type: string
 
 jobs:
   deploy:
@@ -18,10 +26,10 @@ jobs:
           echo "myBranch=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
           echo "myTag=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
       
-      - name: Update project deployment page
+      - name: Update page
         uses: DamianReeves/write-file-action@master
         with:
-          path: Development_Deployments.md
+          path: ${{ inputs.myEnvironment }}_Deployments.md
           contents: |
             | Date | Hour | Commit ID | Branch | Tag |
             |------|------|-----------|--------|-----|
