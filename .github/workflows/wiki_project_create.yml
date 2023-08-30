@@ -16,7 +16,7 @@ jobs:
       - name: Checkout project.wiki repo
         uses: actions/checkout@v3
         with:
-          repository: 'https://github.com/bromba-noesis/${{ inputs.projectName }}.wiki'
+          repository: 'bromba-noesis/${{ inputs.projectName }}.wiki'
       - name: Create project pages
         run: |
           # create new project index page
