@@ -37,7 +37,7 @@ jobs:
           write-mode: overwrite
 
       - name: Upload to wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        uses: bromba-noesis/github-wiki-publish-action@v1
         with:
           path: .
         env:
