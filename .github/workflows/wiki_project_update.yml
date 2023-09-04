@@ -27,7 +27,7 @@ jobs:
           echo "myTag=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
       
       - name: Update page
-        uses: DamianReeves/write-file-action@master
+        uses: bromba-noesis/write-file-action@master # original: DamianReeves/write-file-action@master
         with:
           path: ${{ inputs.myEnvironment }}_Deployments.md
           contents: |
@@ -37,7 +37,7 @@ jobs:
           write-mode: overwrite
 
       - name: Upload to wiki
-        uses: bromba-noesis/github-wiki-publish-action@v1
+        uses: bromba-noesis/github-wiki-publish-action@v1 # original: SwiftDocOrg/github-wiki-publish-action@v1
         with:
           path: .
         env:
