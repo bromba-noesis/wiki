@@ -1,6 +1,12 @@
 name: Wiki project create
 
 on: 
+    workflow_call:
+      inputs:
+        repoName:
+          description: 'New repo name to create wiki on'
+          required: true
+          type: string
     workflow_dispatch:
       inputs:
         repoName:
