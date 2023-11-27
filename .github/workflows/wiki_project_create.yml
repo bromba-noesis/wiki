@@ -19,6 +19,8 @@ jobs:
           repository: 'bromba-noesis/${{ inputs.projectName }}.wiki'
       - name: Create project pages
         run: |
+          #
+          ls -l
           # create new project index page
           echo "Deployments by environment:" > Home.md
           echo "* [Dev](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Development_Deployments)" >> Home.md
@@ -28,6 +30,8 @@ jobs:
           echo "-" > Development_Deployments.md
           echo "-" > Quality_Deployments.md
           echo "-" > Production_Deployments.md
+          #
+          ls -l
 
       - name: Upload pages to wiki
         uses: bromba-noesis/github-wiki-publish-action@v1
