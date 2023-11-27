@@ -21,24 +21,23 @@ jobs:
       - name: Create project pages
         run: |
           #
-          ls -l wiki/
-          cat wiki/Home.md
+          ls -l
+          rm -f Home.md
           # create new project index page
-          echo "Deployments by environment:" > wiki/Home.md
-          echo "* [Dev](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Development_Deployments)" >> wiki/Home.md
-          echo "* [Qua](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Quality_Deployments)" >> wiki/Home.md
-          echo "* [Prd](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Production_Deployments)" >> wiki/Home.md
+          echo "Deployments by environment:" > Home.md
+          echo "* [Dev](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Development_Deployments)" >> Home.md
+          echo "* [Qua](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Quality_Deployments)" >> Home.md
+          echo "* [Prd](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Production_Deployments)" >> Home.md
           # create empty page for each environment 
-          echo "-" > wiki/Development_Deployments.md
-          echo "-" > wiki/Quality_Deployments.md
-          echo "-" > wiki/Production_Deployments.md
+          #echo "-" > Development_Deployments.md
+          #echo "-" > Quality_Deployments.md
+          #echo "-" > Production_Deployments.md
           #
-          ls -l wiki/
-          cat wiki/Home.md
-
+          ls -l
+          
       - name: Upload pages to wiki
         uses: bromba-noesis/github-wiki-publish-action@v1
         with:
-          path: "wiki"
+          path: .
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.bromba_noesis_pat_wiki }}
