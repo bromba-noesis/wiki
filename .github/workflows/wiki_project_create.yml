@@ -3,8 +3,8 @@ name: Wiki project create
 on: 
     workflow_dispatch:
       inputs:
-        projectName:
-          description: 'New project name to create'
+        repoName:
+          description: 'New repo name to create wiki on'
           required: true
           type: string
 
@@ -13,27 +13,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout project.wiki repo
+      - name: Checkout repo.wiki
         uses: actions/checkout@v3
         with:
-          repository: 'bromba-noesis/${{ inputs.projectName }}.wiki'
+          repository: 'bromba-noesis/${{ inputs.repoName }}.wiki'
           path: 'wiki'
-      - name: Create project pages
+      - name: Create repo pages
         run: |
-          #
-          ls -l
-          rm -f Home.md
-          # create new project index page
+          # create new wiki index page
           echo "Deployments by environment:" > Home.md
-          echo "* [Dev](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Development_Deployments)" >> Home.md
-          echo "* [Qua](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Quality_Deployments)" >> Home.md
-          echo "* [Prd](https://github.com/bromba-noesis/${{ inputs.projectName }}/wiki/Production_Deployments)" >> Home.md
+          echo "* [Dev](https://github.com/bromba-noesis/${{ inputs.repoName }}/wiki/Development_Deployments)" >> Home.md
+          echo "* [Qua](https://github.com/bromba-noesis/${{ inputs.repoName }}/wiki/Quality_Deployments)" >> Home.md
+          echo "* [Prd](https://github.com/bromba-noesis/${{ inputs.repoName }}/wiki/Production_Deployments)" >> Home.md
           # create empty page for each environment 
-          #echo "-" > Development_Deployments.md
-          #echo "-" > Quality_Deployments.md
-          #echo "-" > Production_Deployments.md
-          #
-          ls -l
+          echo "-" > Development_Deployments.md
+          echo "-" > Quality_Deployments.md
+          echo "-" > Production_Deployments.md
           
       - name: Upload pages to wiki
         uses: bromba-noesis/github-wiki-publish-action@v1
