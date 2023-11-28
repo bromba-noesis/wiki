@@ -20,7 +20,7 @@ jobs:
       - name: setup
         id: setup 
         run: |
-          echo "myDate=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+          echo "myDate=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
           echo "myHour=$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
           echo "myCID=${GITHUB_SHA}" >> $GITHUB_OUTPUT
           echo "myBranch=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
