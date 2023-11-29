@@ -26,6 +26,8 @@ jobs:
 
       - name: Update library version page with deployment
         run: |
+          echo listing...
+          ls -l
           # delete first line
           sed -i '1d' ${{ inputs.myVersion }}.md
           # add repo, environment and date to library version page
