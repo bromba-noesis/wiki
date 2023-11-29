@@ -28,7 +28,7 @@ jobs:
           # delete first line
           sed -i '1d' ${{ inputs.myVersion }}.md
           # add repo, environment and date to library version page
-          echo "| [${{ inputs.myRepo }}](https://github.com/bromba-noesis/${{ inputs.myRepo }}/wiki) | ${{ inputs.myEnvironment }} | $(date +'%Y-%m-%d') |" >> ${{ inputs.myVersion }}.md
+          echo "* | [${{ inputs.myRepo }}](https://github.com/bromba-noesis/${{ inputs.myRepo }}/wiki) | ${{ inputs.myEnvironment }} | $(date +'%Y-%m-%d') |" >> ${{ inputs.myVersion }}.md
           # sort index
           grep -v '^[[:space:]]*$' ${{ inputs.myVersion }}.md | sort > new.md
           mv new.md ${{ inputs.myVersion }}.md
