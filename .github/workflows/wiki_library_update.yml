@@ -1,0 +1,44 @@
+name: Library update
+
+on: 
+    workflow_dispatch:
+      inputs:
+        myRepo:
+          required: true
+          type: string
+        myEnvironment:
+          required: true
+          type: string
+        myVersion:
+          required: true
+          type: string
+        
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout wiki.wiki repo
+        uses: actions/checkout@v3
+        with:
+          repository: '${{ github.repository }}.wiki'
+          sparse-checkout: '${{ inputs.myVersion }}.md'
+
+      - name: Update library version page with deployment
+        run: |
+          # delete first line
+          sed -i '1d' ${{ inputs.myVersion }}.md
+          # add repo, environment and date to library version page
+          echo "| [${{ inputs.myRepo }}](https://github.com/bromba-noesis/${{ inputs.myRepo }}/wiki) | ${{ inputs.myEnvironment }} | $(date +'%Y-%m-%d') |" >> ${{ inputs.myVersion }}.md
+          # sort index
+          grep -v '^[[:space:]]*$' Home.md | sort > new.md
+          mv new.md ${{ inputs.myVersion }}.md
+          # add back first line
+          sed -i '1s/^/| Repository | Environment | Date |\n/' ${{ inputs.myVersion }}.md
+
+      - name: Upload pages to wiki
+        uses: bromba-noesis/github-wiki-publish-action@v1
+        with:
+          path: .
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.bromba_noesis_pat_wiki }}
